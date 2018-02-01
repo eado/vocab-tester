@@ -3,10 +3,8 @@ word_list = [
     
             ]
 test = []
-stages = [0, 1, 2, 3, 5, 7]
+stages = [1, 1, 2, 3, 5, 7]
 
-#temporary testing variables:
-correct = True
 
 #adds all rows in the word list with days < 1 to test
 def build_test():
@@ -19,11 +17,13 @@ def build_test():
 def grade_test():
     for row in word_list:
         if row in test:
-            if correct:
-                row['stage'] = row['stage'] + 1
-                row['days'] = stages[row['stage']]
-            else:
+            
+                
+            if input("{}:".format(row)):
                 row['stage'] = 0
+            else:
+                row['stage'] = row['stage'] + 1
+            row['days'] = stages[row['stage']]
                 
 def new_day():
     for row in word_list:
