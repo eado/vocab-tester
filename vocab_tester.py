@@ -33,16 +33,17 @@ def new_day():
         row['days'] = row['days'] - 1
     
 def write_test():
-    test_file = open(test_filename, 'w')
-    test_file.write("")
-    for row in test:
-        test_file.write("{}  ___\n".format(row['pinyin']))
-    test_file.close()
+    with open(test_filename, 'w') as test_file:
+      test_file.write("")
+      for row in test:
+          test_file.write("{}  ___\n".format(row['pinyin']))
         
-while true:   
-    print("Stage {}".format(i))
+i = 0        
+while True:   
+    print("Day {}".format(i))
     build_test()
     write_test()
     grade_test()
     new_day()
+    i = i + 1
     print("\n\n")
