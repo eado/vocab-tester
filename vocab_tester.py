@@ -8,13 +8,15 @@ test = []
 #config
 stages = [1, 1, 2, 3, 5, 7]
 test_filename = 'test.txt' #not used yet
+vocab_filename = 'vocab.txt'
+vocab_format = ['word', 'pinyin', 'stage', 'days']
 
 
 #adds all rows in the word list with days < 1 to test
 def build_test():
     del test[:] # clears the table test, as opposed to creating a NEW local table test = []
     for row in word_list: 
-        if row['days'] < 1:
+        if int(row['days']) < 1:
             test.append(row)
 
 def grade_test():
@@ -25,7 +27,7 @@ def grade_test():
             if input("{} {}: ".format(row['word'], row['pinyin'])):
                 row['stage'] = 0
             else:
-                row['stage'] = row['stage'] + 1
+                row['stage'] = int(row['stage']) + 1
             row['days'] = stages[row['stage']]
                 
 def new_day():
@@ -34,11 +36,23 @@ def new_day():
     
 def write_test():
     with open(test_filename, 'w') as test_file:
-      test_file.write("")
-      for row in test:
-          test_file.write("{}  ___\n".format(row['pinyin']))
-        
+        test_file.write("")
+        for row in test:
+            test_file.write("{}  ___\n".format(row['pinyin']))
+                   
+def load_word_list():
+    del word_list [:]
+    with open(vocab_filename, 'r') as vocab_file:
+        for file_row in vocab_file.readlines(): 
+            new_row = {}
+            for column in vocab_format:
+                new_row[column] = file_row.split("#")[vocab_format.index(column)]
+            word_list.append(new_row)
+            
+                
 i = 0        
+load_word_list()
+print(word_list)
 while True:   
     print("Day {}".format(i))
     build_test()
