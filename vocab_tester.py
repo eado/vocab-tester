@@ -82,7 +82,6 @@ def load_word_list_from_sheet():
             
 i = 0        
 load_word_list_from_sheet()
-print(word_list)
 while True:   
     print("Day {}".format(i))
     build_test()
