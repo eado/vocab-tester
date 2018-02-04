@@ -56,7 +56,7 @@ def load_word_list():
 def load_word_list_from_sheet():
     del word_list[:]
     wb = load_workbook(vocab_sheet_filename)
-    sheet = wb.get_sheet_by_name(wb.get_sheet_names()[0]) #sets sheet to the first sheet in the workbook
+    sheet = wb[wb.sheetnames[0]] #sets sheet to the first sheet in the workbook
     
     line_number = 1
     while True:       
